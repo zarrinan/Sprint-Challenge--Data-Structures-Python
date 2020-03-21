@@ -39,10 +39,17 @@ class RingBuffer:
 
 class ArrayRingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.storage = [0]*capacity
+        self.track = 0
 
     def append(self, item):
-        pass
+        if len(self.storage) < self.capacity:
+            self.storage.append(item)
+            self.track += 1
+        else:
+            self.storage[self.track % self.capacity] = item
+            self.track += 1
 
     def get(self):
-        pass
+        return [i for i in self.storage if i]
